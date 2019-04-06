@@ -1,18 +1,8 @@
 import React from "react";
 
 class Product extends React.Component {
-    countClick = 0;
 
-    addToCart(props) {
-        if (props.limit === 0) {
-            alert("We are all out of " + props.productName + ".");
-        } else if (this.countClick === props.limit) {
-            alert("There are too many " + props.productName + " in your cart.");
-        } else {
-            this.countClick = this.countClick + 1;
-            alert("You have " + this.countClick + " " + props.productName + "(s) in your cart.")
-        }
-    }
+
     render() {
         return (
             <div className="ui cards">
@@ -23,9 +13,13 @@ class Product extends React.Component {
                             Price:${this.props.price}
                         </div>
                     </div>
-                    <div className="ui bottom attached button" onClick={() => this.addToCart(this.props)}>
+                    <div className="ui bottom attached button" onClick={() => {this.props.onAddToCart(this.props.productName,this.props.price)}}>
                         <i className="add icon"></i>
                         Add to cart
+                    </div>
+                    <div className="ui bottom attached button" onClick={() => {this.props.onRemoveToCart(this.props.productName,this.props.price)}}>
+                        <i className="x icon"></i>
+                        Remove from cart
                     </div>
                 </div>
             </div>
